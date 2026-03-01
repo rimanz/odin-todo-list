@@ -1,0 +1,38 @@
+.sidebar {
+  flex-basis: 200px;
+  background-color: whitesmoke;
+}
+
+.brand {
+  padding: 1rem;
+  color: tomato;
+}
+
+.sidebar-group {
+  padding-block: 1rem;
+}
+
+.section-heading {
+  font-size: 1rem;
+  font-weight: 700;
+  color: grey;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+}
+
+.sidebar-item {
+  line-height: 2rem;
+  padding-left: 1.5rem;
+}
+
+.sidebar-item::before {
+  content: "# ";
+  opacity: 0.5;
+  font-weight: 700;
+}
+
+.sidebar-item:hover {
+  cursor: pointer;
+  opacity: 0.75;
+  background-color: silver;
+}
