@@ -3,17 +3,15 @@ import createProject from "./project.js";
 let projects = [{ id: "default", name: "default", todos: [] }];
 
 export function addProject(projectName) {
-  const existingNames = projects.map((p) => p.name);
-
-  if (existingNames.includes(projectName)) {
-    throw new Error("Project name already exists!");
+  if (projects.some((p) => p.name === projectName)) {
+    throw new Error(`Project name '${projectName}' already exists!`);
   } else {
-    projects = [...projects, createProject()];
+    projects = [...projects, createProject(projectName)];
   }
 }
 
 export function deleteProject(projectId) {
-  if (projects.length > 1) {
+  if (projectId && projects.length > 1) {
     projects = projects.filter((p) => p.id !== projectId);
   } else {
     throw new Error("You must have at least one project!");
@@ -25,23 +23,23 @@ export function updateProjects(updatedProjects) {
 }
 
 export function renameProject(projectId, newName) {
-  projects = projects.map((p) =>
-    p.id === projectId ? { ...p, name: newName } : p,
-  );
+  const project = projects.find((p) => p.id === projectId);
+
+  if (!project) {
+    throw new Error(`No project found with ID: ${projectId}`);
+  } else if (
+    projects.filter((p) => p.id !== projectId).some((p) => p.name === newName)
+  ) {
+    throw new Error(`The name '${newName}' already exists!`);
+  }
+
+  project.name = newName;
 }
 
 export function getProjects() {
-  return projects;
+  return [...projects];
 }
 
 export function getProjectById(projectId) {
-  let targetProject;
-
-  projects.forEach((p) => {
-    if (p.id === projectId) {
-      targetProject = { ...p };
-    }
-  });
-
-  return targetProject;
+  return projects.find((p) => p.id === projectId);
 }
