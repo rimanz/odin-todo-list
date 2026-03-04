@@ -1,6 +1,6 @@
 import createProject from "./project.js";
 
-let projects = [{ id: "0001", name: "default", todos: [] }];
+let projects = [{ id: "default", name: "default", todos: [] }];
 
 export function addProject(projectName) {
   const existingNames = projects.map((p) => p.name);
@@ -20,6 +20,10 @@ export function deleteProject(projectId) {
   }
 }
 
+export function updateProjects(updatedProjects) {
+  projects = [...updatedProjects];
+}
+
 export function renameProject(projectId, newName) {
   projects = projects.map((p) =>
     p.id === projectId ? { ...p, name: newName } : p,
@@ -35,7 +39,7 @@ export function getProjectById(projectId) {
 
   projects.forEach((p) => {
     if (p.id === projectId) {
-      targetProject = p;
+      targetProject = { ...p };
     }
   });
 
