@@ -18,10 +18,6 @@ export function deleteProject(projectId) {
   }
 }
 
-export function updateProjects(updatedProjects) {
-  projects = [...updatedProjects];
-}
-
 export function renameProject(projectId, newName) {
   const project = projects.find((p) => p.id === projectId);
 
