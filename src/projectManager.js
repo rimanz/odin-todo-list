@@ -1,7 +1,7 @@
 import createProject from "./project.js";
 import createTodo from "./todo.js";
 
-let projects = [{ id: "default", name: "default", todos: [] }];
+let projects = [{ id: "default", name: "Default", todos: [] }];
 
 export function addProject(projectName) {
   if (!projectName) {

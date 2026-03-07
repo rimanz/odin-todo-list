@@ -1,5 +1,8 @@
+import { getProjects } from "../projectManager.js";
 import "../styles/sidebar.css";
 import { createItemGroup, createNode } from "./layout.js";
+
+const projects = getProjects();
 
 export function createSidebarItems(options) {
   const section = createNode({ ...options, tag: options.tag || "section" });
@@ -30,14 +33,12 @@ export default function createSidebar() {
     parent: sidebar,
   });
 
-  dummyProjects.forEach((item) => {
+  projects.forEach((project, index) => {
     createNode({
       tag: "li",
-      classNames: "sidebar-item",
-      textContent: item,
+      classNames: "sidebar-item" + (index === 0 ? " active" : ""),
+      textContent: project.name,
       parent: itemGroup,
     });
   });
 }
-
-const dummyProjects = ["Default", "Personal", "Hobby", "Work"];

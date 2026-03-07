@@ -36,3 +36,9 @@
   opacity: 0.75;
   background-color: silver;
 }
+
+.sidebar .active {
+  font-weight: 700;
+  opacity: 0.75;
+  background-color: silver;
+}
