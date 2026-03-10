@@ -1,0 +1,20 @@
+.project-view {
+  padding: 1rem 1.5rem;
+  order: 1;
+}
+
+.project-view header {
+  padding-block: 1rem;
+}
+
+.project-name {
+  font-size: 2.5rem;
+  font-weight: 400;
+  font-style: italic;
+  text-transform: capitalize;
+  color: silver;
+}
+
+.project-name::before {
+  content: "# ";
+}

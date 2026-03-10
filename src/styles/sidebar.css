@@ -15,7 +15,7 @@
   padding-block: 1rem;
 }
 
-.section-heading {
+.sidebar-group .section-heading {
   font-size: 1rem;
   font-weight: 700;
   color: grey;
@@ -24,6 +24,7 @@
 }
 
 .sidebar-item {
+  list-style-type: none;
   line-height: 2rem;
   padding-left: 1.5rem;
 }
@@ -31,7 +32,7 @@
 .sidebar-item::before {
   content: "# ";
   opacity: 0.5;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .sidebar-item:hover {
@@ -46,6 +47,12 @@
   background-color: silver;
 }
 
+.active::before {
+  font-weight: 900;
+  color: tomato;
+  opacity: 1;
+}
+
 .add-project-btn {
   font: inherit;
   font-weight: 500;
@@ -56,6 +63,7 @@
   margin: 0 0.5rem;
   border: 1px solid;
   border-radius: 3px;
+  outline-color: tomato;
 }
 
 .add-project-btn:hover {

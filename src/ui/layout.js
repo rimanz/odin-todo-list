@@ -60,7 +60,7 @@ export function createItemGroup(options) {
 
   const itmeContainer = createNode({
     tag: options.isOrderedGroup ? "ol" : "ul",
-    classNames: "container",
+    classNames: "item-container",
     parent: section,
   });
 

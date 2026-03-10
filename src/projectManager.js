@@ -2,6 +2,15 @@ import createProject from "./project.js";
 import createTodo from "./todo.js";
 
 let projects = [{ id: "default", name: "Default", todos: [] }];
+let activeProjectId = "default";
+
+export function getActiveProjectId() {
+  return activeProjectId;
+}
+
+export function setActiveProjectId(projectId) {
+  activeProjectId = projectId;
+}
 
 export function addProject(projectName) {
   if (!projectName) {
