@@ -6,6 +6,33 @@
     <title>Document</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h2 class="brand">Odin Todo List</h2>
+
+        <!-- Projects -->
+        <section class="sidebar-group projects">
+          <h4 class="section-heading">Projects</h4>
+
+          <!-- Project Listing -->
+          <ul id="project-list" class="item-container">
+            <li data-id="default" class="sidebar-item">Default</li>
+          </ul>
+        </section>
+
+        <!-- Add Project Button -->
+        <button id="add-project-btn" class="add-project-btn">
+          Add Project
+        </button>
+      </aside>
+
+      <!-- Project View -->
+      <main class="project-view">
+        <header>
+          <h2 id="project-view-header" class="project-name">Test</h2>
+        </header>
+      </main>
+    </div>
   </body>
 </html>
