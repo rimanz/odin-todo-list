@@ -6,6 +6,10 @@
   padding: 0;
 }
 
+li {
+  list-style-type: none;
+}
+
 body {
   font-family:
     system-ui,

@@ -1,7 +1,14 @@
 import createProject from "./project.js";
 import createTodo from "./todo.js";
 
-let projects = [{ id: "default", name: "Default", todos: [] }];
+let projects = [
+  {
+    id: "default",
+    name: "Default",
+    todos: [createTodo("Test 1", "Testing...", "20-02-2002", "high")],
+    todos: [createTodo("Test 2", "Testing again", "20-02-2002")],
+  },
+];
 let activeProjectId = "default";
 
 export function getActiveProjectId() {
