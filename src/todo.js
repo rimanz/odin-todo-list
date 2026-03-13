@@ -2,7 +2,7 @@ export default function createTodo(
   title,
   description,
   dueDate,
-  priority,
+  priority = "medium",
   notes = "",
   checklist = [],
 ) {
@@ -11,7 +11,7 @@ export default function createTodo(
     title,
     description,
     dueDate,
-    priority: "medium",
+    priority,
     notes,
     checklist,
     completed: false,
