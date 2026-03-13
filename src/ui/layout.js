@@ -68,3 +68,11 @@ export function createItemGroup(options) {
   // It makes it easier to refer container to put things inside it.
   return itmeContainer;
 }
+
+export function createButton(options, ...children) {
+  const button = createNode(options);
+
+  if (children.length > 0) {
+    children.forEach((child) => button.appendChild(child));
+  }
+}
