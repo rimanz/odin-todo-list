@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: stretch;
   flex-basis: 200px;
+  flex-shrink: 0;
   background-color: whitesmoke;
 }
 
