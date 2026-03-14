@@ -108,7 +108,7 @@ export function moveTodo(todoId, sourceProjectId, destinationProjectId) {
   addTodo(destinationProjectId, todo);
 }
 
-export function listTodos(projectId) {
+export function getTodos(projectId) {
   return getProjectById(projectId).todos;
 }
 
