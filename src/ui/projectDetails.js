@@ -14,11 +14,23 @@ const todoListEl = document.getElementById("todo-list");
 export default function createProjectDetails() {
   const activeProject = getProjectById(getActiveProjectId());
   const todos = listTodos(activeProject.id);
-  const placeholderText = "For now there is no todo to show!";
+  const placeholderText = "For now there are no todos to show. Please add one.";
 
   projectTitleEl.textContent = activeProject.name;
-  todos.forEach((todo) => {
+  todoListEl.textContent = "";
+
+  if (todos.length > 0) {
+    todos.forEach((todo) => {
+      const item = createNode({ tag: "li", parent: todoListEl });
+      createTodoCard(item, todo);
+    });
+  } else {
     const item = createNode({ tag: "li", parent: todoListEl });
-    createTodoCard(item, todo);
-  });
+    createNode({
+      tag: "p",
+      classNames: "placeholder-text",
+      textContent: placeholderText,
+      parent: item,
+    });
+  }
 }

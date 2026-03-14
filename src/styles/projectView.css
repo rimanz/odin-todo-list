@@ -35,3 +35,13 @@
 .todo-list {
   padding-block: 1rem;
 }
+
+.placeholder-text {
+  font-size: 2rem;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.5;
+  text-align: center;
+  color: silver;
+  padding: 2rem 1rem;
+}
