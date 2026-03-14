@@ -5,8 +5,15 @@ let projects = [
   {
     id: "default",
     name: "Default",
-    todos: [createTodo("Test 1", "Testing...", "20-02-2002", "high")],
-    todos: [createTodo("Test 2", "Testing again", "20-02-2002")],
+    todos: [
+      createTodo({
+        title: "Test 1",
+        description: "Testing...",
+        dueDate: "20-02-2002",
+        priority: "high",
+        notes: "Some notes may go here.",
+      }),
+    ],
   },
 ];
 let activeProjectId = "default";

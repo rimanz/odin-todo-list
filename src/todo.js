@@ -1,11 +1,11 @@
-export default function createTodo(
+export default function createTodo({
   title,
   description,
   dueDate,
   priority = "medium",
   notes = "",
   checklist = [],
-) {
+}) {
   return {
     id: crypto.randomUUID(),
     title,
