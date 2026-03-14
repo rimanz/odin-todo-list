@@ -5,6 +5,7 @@ import {
 } from "../projectManager.js";
 import "../styles/projectView.css";
 import { createNode } from "./layout.js";
+import createTodoCard from "./todoCard.js";
 
 const projectTitleEl = document.getElementById("project-view-header");
 const todoSectionEl = document.getElementById("todos");
@@ -18,5 +19,6 @@ export default function createProjectDetails() {
   projectTitleEl.textContent = activeProject.name;
   todos.forEach((todo) => {
     const item = createNode({ tag: "li", parent: todoListEl });
+    createTodoCard(item, todo);
   });
 }
