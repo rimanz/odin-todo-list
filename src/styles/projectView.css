@@ -33,6 +33,8 @@
 }
 
 .todo-list {
+  display: flex;
+  flex-direction: column;
   padding-block: 1rem;
 }
 
@@ -44,4 +46,29 @@
   text-align: center;
   color: silver;
   padding: 2rem 1rem;
+}
+
+.add-todo-btn {
+  font: inherit;
+  font-weight: 500;
+  text-align: center;
+  background-color: whitesmoke;
+  color: tomato;
+  padding: 0.4rem 1.6rem;
+  border: 1px solid;
+  border-radius: 3px;
+  outline-color: tomato;
+}
+
+.add-todo-btn:hover {
+  cursor: pointer;
+  background-color: tomato;
+  color: white;
+  opacity: 0.8;
+}
+
+.add-todo-btn:active {
+  cursor: pointer;
+  background-color: tomato;
+  color: white;
 }

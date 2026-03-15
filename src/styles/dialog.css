@@ -1,0 +1,93 @@
+dialog {
+  margin: auto;
+  padding: 1rem;
+  border: 2px solid tomato;
+  border-radius: 8px;
+  min-width: 280px;
+
+  &::backdrop {
+    background-color: black;
+    opacity: 0.75;
+  }
+}
+
+.dialog-heading {
+  font-size: 1.25rem;
+  justify-self: center;
+  padding-block: 0.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 3px solid;
+  opacity: 0.75;
+}
+
+dialog form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+dialog label {
+  flex-basis: 15ch;
+  font-weight: bold;
+  opacity: 0.75;
+}
+
+dialog input,
+dialog textarea,
+dialog select {
+  font: inherit;
+  flex-basis: 100%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  background-color: inherit;
+  height: 2rem;
+  min-width: 10ch;
+  padding-inline: 0.25rem;
+  border: 1px solid grey;
+  border-radius: 4px;
+}
+
+.controls-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+form button {
+  font: inherit;
+  font-weight: bold;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid tomato;
+  border-radius: 4px;
+  opacity: 0.75;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.9;
+  }
+
+  &:active {
+    opacity: 1;
+  }
+}
+
+form button[type="submit"] {
+  background-color: tomato;
+  color: white;
+  opacity: 0.85;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    opacity: 1;
+  }
+}

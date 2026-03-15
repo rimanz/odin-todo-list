@@ -38,8 +38,72 @@
           <h3 class="section-header">Todos</h3>
 
           <ul id="todo-list" class="todo-list"></ul>
+
+          <button id="add-todo-btn" class="add-todo-btn">Add Todo</button>
         </section>
       </main>
     </div>
+
+    <!-- Dialog box -->
+    <dialog id="dialog">
+      <h3 id="dialog-heading" class="dialog-heading"></h3>
+
+      <form id="todoForm" class="dialog-form">
+        <div class="input-wrapper">
+          <label for="todo-title"> Title: </label>
+          <input
+            type="text"
+            id="todo-title"
+            name="title"
+            minlength="1"
+            maxlength="20"
+            required
+            autofocus
+          />
+        </div>
+
+        <div class="input-wrapper">
+          <label for="todo-desc"> Description: </label>
+          <textarea
+            id="todo-desc"
+            name="description"
+            minlength="5"
+            maxlength="200"
+            rows="3"
+          >
+          </textarea>
+        </div>
+
+        <div class="input-wrapper">
+          <label for="due-date"> Due Date: </label>
+          <input type="date" id="date-due" name="dueDate" />
+        </div>
+
+        <div class="input-wrapper">
+          <label for="priority"> Priority:</label>
+          <select id="todo-priority" name="priority" minlength="2">
+            <option value="high">High</option>
+            <option value="medium" selected>Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </div>
+
+        <div class="input-wrapper">
+          <label for="todo-notes"> Notes: </label>
+          <textarea
+            id="toodo-notes"
+            name="notes"
+            rows="3"
+            minlength="2"
+            maxlength="200"
+          ></textarea>
+        </div>
+
+        <div class="controls-wrapper">
+          <button id="cancel-btn" value="cancel">Cancel</button>
+          <button id="submit-btn" type="submit">Submit</button>
+        </div>
+      </form>
+    </dialog>
   </body>
 </html>
