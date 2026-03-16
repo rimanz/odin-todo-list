@@ -4,7 +4,7 @@ import {
   getTodos,
 } from "../projectManager.js";
 import "../styles/projectView.css";
-import { showAddTaskDialog } from "./dialog.js";
+import { showTaskDialog } from "./dialog.js";
 import { createNode } from "./layout.js";
 import createTodoCard from "./todoCard.js";
 
@@ -43,5 +43,5 @@ export default function createProjectDetails() {
 
 // Listeners:
 addTodoBtn.addEventListener("click", (e) => {
-  showAddTaskDialog();
+  showTaskDialog();
 });

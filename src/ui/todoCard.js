@@ -1,11 +1,11 @@
 import "../styles/todoCard.css";
+import { showTaskDialog } from "./dialog.js";
 import { createButton, createNode } from "./layout.js";
 
 export default function createTodoCard(parent, data) {
   // todo card
   const card = createNode({
     classNames: `todo-card priority-${data.priority}`,
-    // textContent: data.title,
     attributes: { id: data.id },
     parent,
   });
@@ -55,7 +55,7 @@ export default function createTodoCard(parent, data) {
   });
 
   // todo actions -> edit buttton
-  createButton({
+  const todoEditBtn = createButton({
     tag: "button",
     classNames: "todo-action-btn edit-btn",
     parent: todoActions,
@@ -66,5 +66,10 @@ export default function createTodoCard(parent, data) {
     tag: "button",
     classNames: "todo-action-btn delete-btn",
     parent: todoActions,
+  });
+
+  // Listeners:
+  todoEditBtn.addEventListener("click", (e) => {
+    showTaskDialog(data);
   });
 }
