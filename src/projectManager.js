@@ -119,40 +119,13 @@ export function getTodos(projectId) {
   return getProjectById(projectId).todos;
 }
 
-function editTodo(projectId, todoId, prop, value) {
+export function editTodo(projectId, todoId, prop, value) {
   const todo = getTodoById(projectId, todoId);
   todo[prop] = value;
 
   const project = getProjectById(projectId);
   project.todos = project.todos.map((t) => (t.id === todoId ? todo : t));
   projects = getProjects().map((p) => (p.id === projectId ? project : p));
-}
-
-export function editTodoTitle(projectId, todoId, value) {
-  editTodo(projectId, todoId, "title", value);
-}
-
-export function editTodoDescription(projectId, todoId, value) {
-  editTodo(projectId, todoId, "description", value);
-}
-
-export function edtitTodoNotes(projectId, todoId, value) {
-  editTodo(projectId, todoId, "notes", value);
-}
-
-export function editDueDate(projectId, todoId, value) {
-  editTodo(projectId, todoId, "dueDate", value);
-}
-
-export function setTodoPriority(projectId, todoId, value) {
-  const validPriorities = ["high", "medium", "low"];
-  value = value.toLowerCase();
-
-  if (validPriorities.includes(value)) {
-    editTodo(projectId, todoId, "priority", value);
-  } else {
-    throw new Error(`${value} is not a valid priority!`);
-  }
 }
 
 export function toggleTodo(projectId, todoId) {
