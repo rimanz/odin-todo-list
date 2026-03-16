@@ -1,9 +1,4 @@
-import {
-  addTodo,
-  editTodo,
-  getActiveProjectId,
-  getProjects,
-} from "../projectManager.js";
+import { addTodo, editTodo, getActiveProjectId } from "../projectManager.js";
 import "../styles/dialog.css";
 import { listTodos } from "./projectDetails.js";
 
@@ -36,13 +31,11 @@ todoForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const projectId = getActiveProjectId();
   const data = Object.fromEntries(new FormData(todoForm));
-  console.log(data);
 
   if (editMode) {
     Object.keys(data).forEach((key) => {
       editTodo(projectId, todoId, key, data[key]);
     });
-    console.log(getProjects());
   } else {
     addTodo(projectId, data);
   }
