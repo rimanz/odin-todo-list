@@ -4,6 +4,7 @@ import { listTodos } from "./projectDetails.js";
 
 const dialog = document.getElementById("dialog");
 const dialogHeading = document.getElementById("dialog-heading");
+const forms = document.querySelectorAll(".dialog-form");
 const todoForm = document.getElementById("todo-form");
 const inputFields = document.querySelectorAll("[name]");
 const cancelBtn = document.getElementById("cancel-btn");
@@ -11,12 +12,17 @@ const submitBtn = document.getElementById("submit-btn");
 let editMode;
 let todoId;
 
-export function showTaskDialog(todoData = null) {
+function showForm(formId) {
+  forms.forEach((form) => (form.hidden = true));
+  document.getElementById(formId).hidden = false;
+}
+
+export function showTodoDialog(todoData = null) {
   editMode = todoData !== null;
   todoId = todoData?.id;
 
   dialog.showModal();
-  todoForm.removeAttribute("hidden");
+  showForm("todo-form");
   dialogHeading.textContent = `${editMode ? "Edit" : "Add New"} Todo`;
 
   if (editMode) {
@@ -42,6 +48,7 @@ todoForm.addEventListener("submit", (e) => {
 
   listTodos(projectId);
   todoForm.reset();
+  todoForm.setAttribute("hidden");
   dialog.close();
 });
 

@@ -1,5 +1,5 @@
 import "../styles/todoCard.css";
-import { showTaskDialog } from "./dialog.js";
+import { showTodoDialog } from "./dialog.js";
 import { createButton, createNode } from "./layout.js";
 
 export default function createTodoCard(parent, data) {
@@ -70,6 +70,6 @@ export default function createTodoCard(parent, data) {
 
   // Listeners:
   todoEditBtn.addEventListener("click", (e) => {
-    showTaskDialog(data);
+    showTodoDialog(data);
   });
 }

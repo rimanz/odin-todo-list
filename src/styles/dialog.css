@@ -27,6 +27,10 @@ dialog form {
   padding: 1rem;
 }
 
+dialog form[hidden] {
+  display: none;
+}
+
 .input-wrapper {
   display: flex;
   align-items: center;
@@ -35,6 +39,8 @@ dialog form {
 
 dialog label {
   flex-basis: 15ch;
+  align-self: flex-start;
+  line-height: 1.8;
   font-weight: bold;
   opacity: 0.75;
 }
@@ -52,6 +58,11 @@ dialog select {
   padding-inline: 0.25rem;
   border: 1px solid grey;
   border-radius: 4px;
+}
+
+dialog textarea {
+  height: fit-content;
+  padding-block: 0.4rem;
 }
 
 .controls-wrapper {
