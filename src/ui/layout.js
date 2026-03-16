@@ -75,4 +75,6 @@ export function createButton(options, ...children) {
   if (children.length > 0) {
     children.forEach((child) => button.appendChild(child));
   }
+
+  return button;
 }
