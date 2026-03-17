@@ -48,7 +48,7 @@ todoForm.addEventListener("submit", (e) => {
 
   listTodos(projectId);
   todoForm.reset();
-  todoForm.setAttribute("hidden");
+  todoForm.setAttribute("hidden", "");
   dialog.close();
 });
 
