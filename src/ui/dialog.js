@@ -7,14 +7,22 @@ const dialogHeading = document.getElementById("dialog-heading");
 const forms = document.querySelectorAll(".dialog-form");
 const todoForm = document.getElementById("todo-form");
 const inputFields = document.querySelectorAll("[name]");
-const cancelBtn = document.getElementById("cancel-btn");
-const submitBtn = document.getElementById("submit-btn");
+const cancelButtons = document.querySelectorAll(".cancel-btn");
 let editMode;
 let todoId;
 
 function showForm(formId) {
-  forms.forEach((form) => (form.hidden = true));
-  document.getElementById(formId).hidden = false;
+  console.log(formId);
+  const activeForm = document.getElementById(formId);
+  console.log(activeForm);
+
+  forms.forEach((form) => {
+    form.hidden = true;
+    form.classList.remove("active");
+  });
+
+  activeForm.hidden = false;
+  activeForm.classList.add("active");
 }
 
 export function showTodoDialog(todoData = null) {
@@ -52,8 +60,10 @@ todoForm.addEventListener("submit", (e) => {
   dialog.close();
 });
 
-cancelBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  todoForm.reset();
-  dialog.close();
+cancelButtons.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    todoForm.reset();
+    dialog.close();
+  });
 });
