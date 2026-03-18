@@ -12,6 +12,7 @@ const projectTitleEl = document.getElementById("project-view-header");
 const todoSectionEl = document.getElementById("todos");
 const todoListEl = document.getElementById("todo-list");
 const addTodoBtn = document.getElementById("add-todo-btn");
+const placeholderText = "For now there are no todos to show. Please add one.";
 
 export function listTodos(projectId) {
   const todos = getTodos(projectId);
@@ -35,7 +36,6 @@ export function listTodos(projectId) {
 
 export default function createProjectDetails() {
   const activeProject = getProjectById(getActiveProjectId());
-  const placeholderText = "For now there are no todos to show. Please add one.";
 
   projectTitleEl.textContent = activeProject.name;
   listTodos(activeProject.id);

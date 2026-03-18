@@ -13,11 +13,16 @@ dialog {
 
 .dialog-heading {
   font-size: 1.25rem;
+  color: tomato;
   justify-self: center;
   padding-block: 0.25rem;
   margin-bottom: 1.25rem;
-  border-bottom: 3px solid;
-  opacity: 0.75;
+}
+
+.confirm-msg {
+  font-size: 1.25rem;
+  text-align: center;
+  padding-bottom: 1rem;
 }
 
 dialog form {

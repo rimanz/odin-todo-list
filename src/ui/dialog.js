@@ -1,4 +1,9 @@
-import { addTodo, editTodo, getActiveProjectId } from "../projectManager.js";
+import {
+  addTodo,
+  deleteTodo,
+  editTodo,
+  getActiveProjectId,
+} from "../projectManager.js";
 import "../styles/dialog.css";
 import { listTodos } from "./projectDetails.js";
 
@@ -6,15 +11,14 @@ const dialog = document.getElementById("dialog");
 const dialogHeading = document.getElementById("dialog-heading");
 const forms = document.querySelectorAll(".dialog-form");
 const todoForm = document.getElementById("todo-form");
+const confirmationForm = document.getElementById("confirmation-form");
 const inputFields = document.querySelectorAll("[name]");
 const cancelButtons = document.querySelectorAll(".cancel-btn");
 let editMode;
 let todoId;
 
 function showForm(formId) {
-  console.log(formId);
   const activeForm = document.getElementById(formId);
-  console.log(activeForm);
 
   forms.forEach((form) => {
     form.hidden = true;
@@ -40,6 +44,13 @@ export function showTodoDialog(todoData = null) {
   }
 }
 
+export function showDeleteConfirmation(id) {
+  todoId = id;
+  dialog.showModal();
+  showForm("confirmation-form");
+  dialogHeading.textContent = "Confirm";
+}
+
 // Listeners:
 todoForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -57,6 +68,14 @@ todoForm.addEventListener("submit", (e) => {
   listTodos(projectId);
   todoForm.reset();
   todoForm.setAttribute("hidden", "");
+  dialog.close();
+});
+
+confirmationForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const projectId = getActiveProjectId();
+  deleteTodo(projectId, todoId);
+  listTodos(projectId);
   dialog.close();
 });
 

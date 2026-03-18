@@ -1,5 +1,5 @@
 import "../styles/todoCard.css";
-import { showTodoDialog } from "./dialog.js";
+import { showDeleteConfirmation, showTodoDialog } from "./dialog.js";
 import { createButton, createNode } from "./layout.js";
 
 export default function createTodoCard(parent, data) {
@@ -62,7 +62,7 @@ export default function createTodoCard(parent, data) {
   });
 
   // todo actions -> delete button
-  createButton({
+  const todoDeleteBtn = createButton({
     tag: "button",
     classNames: "todo-action-btn delete-btn",
     parent: todoActions,
@@ -71,5 +71,9 @@ export default function createTodoCard(parent, data) {
   // Listeners:
   todoEditBtn.addEventListener("click", (e) => {
     showTodoDialog(data);
+  });
+
+  todoDeleteBtn.addEventListener("click", (e) => {
+    showDeleteConfirmation(data.id);
   });
 }
