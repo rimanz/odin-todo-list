@@ -1,10 +1,10 @@
 import {
-  addProject,
   getActiveProjectId,
   getProjects,
   setActiveProjectId,
 } from "../projectManager.js";
 import "../styles/sidebar.css";
+import { showProjectDialog } from "./dialog.js";
 import { createNode } from "./layout.js";
 import createProjectDetails from "./projectDetails.js";
 
@@ -12,7 +12,7 @@ const projectList = document.getElementById("project-list");
 projectList.addEventListener("click", handleProjectClick);
 
 const addProjectButton = document.getElementById("add-project-btn");
-addProjectButton.addEventListener("click", handleProjectAdd);
+addProjectButton.addEventListener("click", showProjectDialog);
 
 function handleProjectClick(e) {
   const item = e.target.closest(".sidebar-item");
@@ -20,12 +20,6 @@ function handleProjectClick(e) {
 
   listProjects(projectList);
   createProjectDetails();
-}
-
-function handleProjectAdd(e) {
-  const projectName = prompt("Project Name: ");
-  addProject(projectName);
-  listProjects(projectList);
 }
 
 function listProjects(parent) {

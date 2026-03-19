@@ -1,4 +1,5 @@
 import {
+  addProject,
   addTodo,
   deleteTodo,
   editTodo,
@@ -6,10 +7,12 @@ import {
 } from "../projectManager.js";
 import "../styles/dialog.css";
 import { listTodos } from "./projectDetails.js";
+import listProjects from "./sidebar.js";
 
 const dialog = document.getElementById("dialog");
 const dialogHeading = document.getElementById("dialog-heading");
 const forms = document.querySelectorAll(".dialog-form");
+const projectForm = document.getElementById("project-form");
 const todoForm = document.getElementById("todo-form");
 const confirmationForm = document.getElementById("confirmation-form");
 const inputFields = document.querySelectorAll("[name]");
@@ -27,6 +30,12 @@ function showForm(formId) {
 
   activeForm.hidden = false;
   activeForm.classList.add("active");
+}
+
+export function showProjectDialog() {
+  dialog.showModal();
+  showForm("project-form");
+  dialogHeading.textContent = `${editMode ? "Edit" : "Add New"} Project`;
 }
 
 export function showTodoDialog(todoData = null) {
@@ -68,6 +77,14 @@ todoForm.addEventListener("submit", (e) => {
   listTodos(projectId);
   todoForm.reset();
   todoForm.setAttribute("hidden", "");
+  dialog.close();
+});
+
+projectForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(projectForm));
+  addProject(data.name);
+  listProjects();
   dialog.close();
 });
 

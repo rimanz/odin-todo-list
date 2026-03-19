@@ -48,6 +48,27 @@
     <dialog id="dialog">
       <h3 id="dialog-heading" class="dialog-heading"></h3>
 
+      <!-- Add / Edit Project form -->
+      <form id="project-form" class="dialog-form">
+        <div class="input-wrapper">
+          <label for="project-name"> Name: </label>
+          <input
+            type="text"
+            id="project-name"
+            name="name"
+            minlength="1"
+            maxlength="20"
+            required
+            autofocus
+          />
+        </div>
+
+        <div class="controls-wrapper">
+          <button class="cancel-btn" type="button">Cancel</button>
+          <button class="submit-btn" type="submit">Submit</button>
+        </div>
+      </form>
+
       <!-- Add / Edit Todo form -->
       <form id="todo-form" class="dialog-form">
         <div class="input-wrapper">
