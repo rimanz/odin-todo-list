@@ -4,9 +4,10 @@ import {
   deleteTodo,
   editTodo,
   getActiveProjectId,
+  renameProject,
 } from "../projectManager.js";
 import "../styles/dialog.css";
-import { listTodos } from "./projectDetails.js";
+import createProjectDetails, { listTodos } from "./projectDetails.js";
 import listProjects from "./sidebar.js";
 
 const dialog = document.getElementById("dialog");
@@ -18,6 +19,7 @@ const confirmationForm = document.getElementById("confirmation-form");
 const inputFields = document.querySelectorAll("[name]");
 const cancelButtons = document.querySelectorAll(".cancel-btn");
 let editMode;
+let projectId;
 let todoId;
 
 function showForm(formId) {
@@ -32,10 +34,19 @@ function showForm(formId) {
   activeForm.classList.add("active");
 }
 
-export function showProjectDialog() {
+export function showProjectDialog(projectData = null) {
+  editMode = projectData !== null;
+  projectId = projectData.id;
+
   dialog.showModal();
   showForm("project-form");
   dialogHeading.textContent = `${editMode ? "Edit" : "Add New"} Project`;
+
+  if (editMode) {
+    inputFields.forEach((field) => {
+      field.value = projectData[field.name];
+    });
+  }
 }
 
 export function showTodoDialog(todoData = null) {
@@ -83,8 +94,17 @@ todoForm.addEventListener("submit", (e) => {
 projectForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const data = Object.fromEntries(new FormData(projectForm));
-  addProject(data.name);
+
+  if (editMode) {
+    Object.keys(data).forEach((key) => {
+      renameProject(projectId, data.name);
+    });
+  } else {
+    addProject(data.name);
+  }
+
   listProjects();
+  createProjectDetails();
   dialog.close();
 });
 

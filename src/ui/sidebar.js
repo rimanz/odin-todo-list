@@ -5,7 +5,7 @@ import {
 } from "../projectManager.js";
 import "../styles/sidebar.css";
 import { showProjectDialog } from "./dialog.js";
-import { createNode } from "./layout.js";
+import { createButton, createNode } from "./layout.js";
 import createProjectDetails from "./projectDetails.js";
 
 const projectList = document.getElementById("project-list");
@@ -28,13 +28,35 @@ function listProjects(parent) {
 
   parent.textContent = "";
   projects.forEach((project, index) => {
-    createNode({
+    // list item:
+    const item = createNode({
       tag: "li",
       classNames: "sidebar-item" + (project.id === activeId ? " active" : ""),
-      textContent: project.name,
-      attributes: { "data-id": project.id },
+      attributes: { "data-id": project.id, title: project.name },
       parent,
     });
+
+    // item name:
+    createNode({
+      classNames: "item-name",
+      textContent: project.name,
+      parent: item,
+    });
+
+    // project actions:
+    const projectActions = createNode({
+      classNames: "project-actions",
+      parent: item,
+    });
+
+    // project actions -> edit buttton
+    const todoEditBtn = createButton({
+      tag: "button",
+      classNames: "project-action-btn edit-btn",
+      parent: projectActions,
+    });
+
+    todoEditBtn.addEventListener("click", () => showProjectDialog(project));
   });
 }
 

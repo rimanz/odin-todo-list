@@ -25,21 +25,38 @@
 }
 
 .sidebar-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.25rem;
   list-style-type: none;
   line-height: 2rem;
   padding-left: 1.5rem;
+  padding-right: 0.5rem;
+
+  &:hover {
+    background-color: silver;
+  }
 }
 
-.sidebar-item::before {
-  content: "# ";
-  opacity: 0.5;
-  font-weight: 400;
-}
+.item-name {
+  flex-grow: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
-.sidebar-item:hover {
-  cursor: pointer;
-  opacity: 0.75;
-  background-color: silver;
+  &::before {
+    content: "# ";
+    opacity: 0.5;
+    font-weight: 400;
+  }
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.75;
+  }
 }
 
 .sidebar .active {
@@ -48,10 +65,49 @@
   background-color: silver;
 }
 
-.active::before {
+.active .item-name::before {
   font-weight: 900;
   color: tomato;
   opacity: 1;
+}
+
+.project-actions {
+  display: flex;
+  gap: 0.5rem;
+  height: 100%;
+
+  .project-action-btn {
+    font: inherit;
+    font-size: 0.8rem;
+    background-color: black;
+    color: white;
+    height: 1.25rem;
+    width: 1.25rem;
+    mask-size: 1.25rem;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-mode: alpha;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 1;
+      scale: 1.05;
+    }
+
+    &:active {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  .edit-btn {
+    mask-image: url("../icons/edit.png");
+
+    &:hover,
+    &:active {
+      background-color: black;
+    }
+  }
 }
 
 .add-project-btn {
