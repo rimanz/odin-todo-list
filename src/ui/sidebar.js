@@ -50,13 +50,15 @@ function listProjects(parent) {
     });
 
     // project actions -> edit buttton
-    const todoEditBtn = createButton({
+    const editProjectButton = createButton({
       tag: "button",
       classNames: "project-action-btn edit-btn",
       parent: projectActions,
     });
 
-    todoEditBtn.addEventListener("click", () => showProjectDialog(project));
+    editProjectButton.addEventListener("click", () =>
+      showProjectDialog(project),
+    );
   });
 }
 
