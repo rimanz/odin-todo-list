@@ -8,6 +8,7 @@ export default function createTodo({
 }) {
   return {
     id: crypto.randomUUID(),
+    type: "todo",
     title,
     description,
     dueDate,
