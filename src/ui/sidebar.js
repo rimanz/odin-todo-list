@@ -4,7 +4,7 @@ import {
   setActiveProjectId,
 } from "../projectManager.js";
 import "../styles/sidebar.css";
-import { showProjectDialog } from "./dialog.js";
+import { showDeleteConfirmation, showProjectDialog } from "./dialog.js";
 import { createButton, createNode } from "./layout.js";
 import createProjectDetails from "./projectDetails.js";
 
@@ -56,8 +56,19 @@ function listProjects(parent) {
       parent: projectActions,
     });
 
+    // project actions -> delete buttton
+    const deleteProjectButton = createButton({
+      tag: "button",
+      classNames: "project-action-btn delete-btn",
+      parent: projectActions,
+    });
+
     editProjectButton.addEventListener("click", () =>
       showProjectDialog(project),
+    );
+
+    deleteProjectButton.addEventListener("click", () =>
+      showDeleteConfirmation(project.id, "project"),
     );
   });
 }

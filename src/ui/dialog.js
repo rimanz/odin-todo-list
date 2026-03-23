@@ -1,10 +1,13 @@
 import {
   addProject,
   addTodo,
+  deleteProject,
   deleteTodo,
   editTodo,
   getActiveProjectId,
+  getProjects,
   renameProject,
+  setActiveProjectId,
 } from "../projectManager.js";
 import "../styles/dialog.css";
 import createProjectDetails, { listTodos } from "./projectDetails.js";
@@ -64,8 +67,17 @@ export function showTodoDialog(todoData = null) {
   }
 }
 
-export function showDeleteConfirmation(id) {
-  todoId = id;
+export function showDeleteConfirmation(id, type = "todo") {
+  if (type === "todo") {
+    projectId = getActiveProjectId();
+    toodId = id;
+  } else if (type === "project") {
+    projectId = id;
+    todoId = null;
+  } else {
+    console.error("Invalid type provided!");
+  }
+
   dialog.showModal();
   showForm("confirmation-form");
   dialogHeading.textContent = "Confirm";
@@ -110,9 +122,19 @@ projectForm.addEventListener("submit", (e) => {
 
 confirmationForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  const projectId = getActiveProjectId();
-  deleteTodo(projectId, todoId);
-  listTodos(projectId);
+
+  if (todoId === null) {
+    console.log(getProjects());
+    deleteProject(projectId);
+    console.log(getProjects());
+    listProjects();
+    setActiveProjectId(getProjects()[0].id);
+    createProjectDetails();
+  } else {
+    deleteTodo(projectId, todoId);
+    listTodos(projectId);
+  }
+
   dialog.close();
 });
 
