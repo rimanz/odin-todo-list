@@ -36,7 +36,7 @@ function showForm(formId) {
 
 export function showProjectDialog(projectData = null) {
   editMode = projectData !== null;
-  projectId = projectData.id;
+  projectId = projectData?.id;
 
   dialog.showModal();
   showForm("project-form");

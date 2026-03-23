@@ -12,7 +12,7 @@ const projectList = document.getElementById("project-list");
 projectList.addEventListener("click", handleProjectClick);
 
 const addProjectButton = document.getElementById("add-project-btn");
-addProjectButton.addEventListener("click", showProjectDialog);
+addProjectButton.addEventListener("click", () => showProjectDialog());
 
 function handleProjectClick(e) {
   const item = e.target.closest(".sidebar-item");
