@@ -1,3 +1,4 @@
+import { getActiveProjectId, toggleTodo } from "../projectManager.js";
 import "../styles/todoCard.css";
 import { showDeleteConfirmation, showTodoDialog } from "./dialog.js";
 import { createButton, createNode } from "./layout.js";
@@ -11,12 +12,14 @@ export default function createTodoCard(parent, data) {
   });
 
   // status toggler:
-  createNode({
+  const toggleInput = createNode({
     tag: "input",
-    attributes: { type: "radio" },
+    attributes: { type: "checkbox" },
     classNames: "status-toggler",
     parent: card,
   });
+
+  toggleInput.checked = data.completed;
 
   // todo details:
   const todoDetails = createNode({
@@ -75,5 +78,13 @@ export default function createTodoCard(parent, data) {
 
   todoDeleteBtn.addEventListener("click", (e) => {
     showDeleteConfirmation(data.id);
+  });
+
+  toggleInput.addEventListener("change", (e) => {
+    toggleTodo(getActiveProjectId(), data.id);
+
+    data.completed
+      ? card.classList.add("completed")
+      : card.classList.remove("completed");
   });
 }
