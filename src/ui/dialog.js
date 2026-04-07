@@ -70,7 +70,7 @@ export function showTodoDialog(todoData = null) {
 export function showDeleteConfirmation(id, type = "todo") {
   if (type === "todo") {
     projectId = getActiveProjectId();
-    toodId = id;
+    todoId = id;
   } else if (type === "project") {
     projectId = id;
     todoId = null;
