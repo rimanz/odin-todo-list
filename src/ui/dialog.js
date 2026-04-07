@@ -15,26 +15,27 @@ import listProjects from "./sidebar.js";
 
 const dialog = document.getElementById("dialog");
 const dialogHeading = document.getElementById("dialog-heading");
-const forms = document.querySelectorAll(".dialog-form");
-const projectForm = document.getElementById("project-form");
-const todoForm = document.getElementById("todo-form");
-const confirmationForm = document.getElementById("confirmation-form");
+const dialogViews = document.querySelectorAll(".dialog-view");
+const projectForm = document.getElementById("project-view");
+const todoForm = document.getElementById("todo-view");
+const confirmationForm = document.getElementById("confirmation-view");
+const messageBox = document.getElementsByClassName("message-box");
 const inputFields = document.querySelectorAll("[name]");
 const cancelButtons = document.querySelectorAll(".cancel-btn");
 let editMode;
 let projectId;
 let todoId;
 
-function showForm(formId) {
-  const activeForm = document.getElementById(formId);
+function showView(viewId) {
+  const activeView = document.getElementById(viewId);
 
-  forms.forEach((form) => {
-    form.hidden = true;
-    form.classList.remove("active");
+  dialogViews.forEach((view) => {
+    view.hidden = true;
+    view.classList.remove("active");
   });
 
-  activeForm.hidden = false;
-  activeForm.classList.add("active");
+  activeView.hidden = false;
+  activeView.classList.add("active");
 }
 
 export function showProjectDialog(projectData = null) {
@@ -42,7 +43,7 @@ export function showProjectDialog(projectData = null) {
   projectId = projectData?.id;
 
   dialog.showModal();
-  showForm("project-form");
+  showView("project-view");
   dialogHeading.textContent = `${editMode ? "Edit" : "Add New"} Project`;
 
   if (editMode) {
@@ -57,7 +58,7 @@ export function showTodoDialog(todoData = null) {
   todoId = todoData?.id;
 
   dialog.showModal();
-  showForm("todo-form");
+  showView("todo-view");
   dialogHeading.textContent = `${editMode ? "Edit" : "Add New"} Todo`;
 
   if (editMode) {
@@ -79,8 +80,9 @@ export function showDeleteConfirmation(id, type = "todo") {
   }
 
   dialog.showModal();
-  showForm("confirmation-form");
+  showView("confirmation-view");
   dialogHeading.textContent = "Confirm";
+  messageBox.textContent = "Are you sure to delete?";
 }
 
 // Listeners:
@@ -125,7 +127,9 @@ confirmationForm.addEventListener("submit", (e) => {
 
   if (todoId === null) {
     console.log(getProjects());
-    deleteProject(projectId);
+    try {
+      deleteProject(projectId);
+    } catch (error) {}
     console.log(getProjects());
     listProjects();
     setActiveProjectId(getProjects()[0].id);
