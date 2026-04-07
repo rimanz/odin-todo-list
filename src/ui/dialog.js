@@ -46,7 +46,7 @@ export function showProjectDialog(projectData = null) {
 
   dialog.showModal();
   showView("project-view");
-  dialogHeading.textContent = `${editMode ? "Edit" : "Add New"} Project`;
+  dialogHeading.textContent = `${editMode ? "Edit" : "New"} Project`;
 
   if (editMode) {
     inputFields.forEach((field) => {
@@ -61,7 +61,7 @@ export function showTodoDialog(todoData = null) {
 
   dialog.showModal();
   showView("todo-view");
-  dialogHeading.textContent = `${editMode ? "Edit" : "Add New"} Todo`;
+  dialogHeading.textContent = `${editMode ? "Edit" : "New"} Todo`;
 
   if (editMode) {
     inputFields.forEach((field) => {
@@ -134,7 +134,9 @@ confirmationForm.addEventListener("submit", (e) => {
       deleteProject(projectId);
     } catch (error) {
       showView("error-info-view");
-      errorInfoBox.textContent = String(error);
+      dialogHeading.textContent = "Error";
+      console.dir(error);
+      errorInfoBox.textContent = String(error.message);
       return;
     }
 
