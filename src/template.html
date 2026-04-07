@@ -126,12 +126,20 @@
 
       <!-- Delete Confirmation View -->
       <form id="confirmation-view" class="dialog-view">
-        <p class="message-box"></p>
+        <p id="message-box"></p>
         <div class="controls-wrapper">
           <button class="cancel-btn" type="button">Cancel</button>
           <button class="submit-btn" type="submit">Delete</button>
         </div>
       </form>
+
+      <!-- Error / Info View -->
+      <div id="error-info-view" class="dialog-view">
+        <p id="error-info-box"></p>
+        <div class="controls-wrapper">
+          <button class="cancel-btn" type="button">Cancel</button>
+        </div>
+      </div>
     </dialog>
   </body>
 </html>

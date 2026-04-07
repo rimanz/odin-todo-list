@@ -19,7 +19,9 @@ const dialogViews = document.querySelectorAll(".dialog-view");
 const projectForm = document.getElementById("project-view");
 const todoForm = document.getElementById("todo-view");
 const confirmationForm = document.getElementById("confirmation-view");
-const messageBox = document.getElementsByClassName("message-box");
+const messageBox = document.getElementById("message-box");
+const errorInfoView = document.getElementById("error-info-view");
+const errorInfoBox = document.getElementById("error-info-box");
 const inputFields = document.querySelectorAll("[name]");
 const cancelButtons = document.querySelectorAll(".cancel-btn");
 let editMode;
@@ -127,9 +129,15 @@ confirmationForm.addEventListener("submit", (e) => {
 
   if (todoId === null) {
     console.log(getProjects());
+
     try {
       deleteProject(projectId);
-    } catch (error) {}
+    } catch (error) {
+      showView("error-info-view");
+      errorInfoBox.textContent = String(error);
+      return;
+    }
+
     console.log(getProjects());
     listProjects();
     setActiveProjectId(getProjects()[0].id);
