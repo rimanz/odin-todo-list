@@ -72,13 +72,22 @@ export default function createTodoCard(parent, data) {
   });
 
   // Listeners:
+
+  card.addEventListener("click", (e) => {
+    card.classList.toggle("expanded");
+  });
+
   todoEditBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
     showTodoDialog(data);
   });
 
   todoDeleteBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
     showDeleteConfirmation(data.id);
   });
+
+  toggleInput.addEventListener("click", (e) => e.stopPropagation());
 
   toggleInput.addEventListener("change", (e) => {
     toggleTodo(getActiveProjectId(), data.id);
