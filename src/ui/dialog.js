@@ -38,6 +38,12 @@ function showView(viewId) {
 
   activeView.hidden = false;
   activeView.classList.add("active");
+  bringFocus(".active [autofocus]");
+}
+
+function bringFocus(selector) {
+  const targetEl = document.querySelector(selector);
+  targetEl.focus();
 }
 
 export function showProjectDialog(projectData = null) {
