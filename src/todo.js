@@ -11,7 +11,7 @@ export default function createTodo({
     type: "todo",
     title,
     description,
-    dueDate,
+    dueDate: new Date(dueDate),
     priority,
     notes,
     checklist,

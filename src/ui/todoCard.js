@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { getActiveProjectId, toggleTodo } from "../projectManager.js";
 import "../styles/todoCard.css";
 import { showDeleteConfirmation, showTodoDialog } from "./dialog.js";
@@ -39,7 +40,7 @@ export default function createTodoCard(parent, data) {
   createNode({
     tag: "p",
     classNames: "todo-due",
-    textContent: data.dueDate,
+    textContent: format(data.dueDate, "dd-MM-yyyy"),
     parent: todoDetails,
   });
 
@@ -72,7 +73,6 @@ export default function createTodoCard(parent, data) {
   });
 
   // Listeners:
-
   card.addEventListener("click", (e) => {
     card.classList.toggle("expanded");
   });
