@@ -1,44 +1,33 @@
 import createProject from "./project.js";
+import { getState, setState } from "./storage.js";
 import createTodo from "./todo.js";
 
-let projects = [
-  {
-    id: "default",
-    name: "Default",
-    todos: [
-      createTodo({
-        title: "Test 1",
-        description: "Testing...",
-        dueDate: "20-02-2002",
-        priority: "high",
-        notes: "Some notes may go here.",
-      }),
-    ],
-  },
-];
-let activeProjectId = "default";
+const state = getState();
 
 export function getActiveProjectId() {
-  return activeProjectId;
+  return state.activeProjectId;
 }
 
 export function setActiveProjectId(projectId) {
-  activeProjectId = projectId;
+  state.activeProjectId = projectId;
+  setState(state);
 }
 
 export function addProject(projectName) {
   if (!projectName) {
     throw new Error("A project name must be provided!");
-  } else if (projects.some((p) => p.name === projectName)) {
+  } else if (state.projects.some((p) => p.name === projectName)) {
     throw new Error(`The project name '${projectName}' already exists!`);
   } else {
-    projects = [...projects, createProject(projectName)];
+    state.projects = [...state.projects, createProject(projectName)];
+    setState(state);
   }
 }
 
 export function deleteProject(projectId) {
-  if (getProjectById(projectId) && projects.length > 1) {
-    projects = projects.filter((p) => p.id !== projectId);
+  if (getProjectById(projectId) && state.projects.length > 1) {
+    state.projects = state.projects.filter((p) => p.id !== projectId);
+    setState();
   } else {
     throw new Error("You must have at least one project!");
   }
@@ -49,23 +38,26 @@ export function renameProject(projectId, newName) {
 
   if (
     project &&
-    projects.filter((p) => p.id !== projectId).some((p) => p.name === newName)
+    state.projects
+      .filter((p) => p.id !== projectId)
+      .some((p) => p.name === newName)
   ) {
     throw new Error(`The name '${newName}' already exists!`);
   } else {
     project.name = newName;
+    setState(state);
   }
 }
 
 export function getProjects() {
-  return [...projects];
+  return state.projects;
 }
 
 export function getProjectById(projectId) {
   let project;
 
   if (projectId) {
-    project = projects.find((p) => p.id === projectId);
+    project = state.projects.find((p) => p.id === projectId);
   } else {
     throw new Error("A project ID must be provided!");
   }
@@ -80,7 +72,10 @@ export function getProjectById(projectId) {
 export function addTodo(projectId, todoData) {
   const project = getProjectById(projectId);
   project.todos = [...structuredClone(project.todos), createTodo(todoData)];
-  projects = projects.map((p) => (p.id === projectId ? project : p));
+  state.projects = state.projects.map((p) =>
+    p.id === projectId ? project : p,
+  );
+  setState(state);
 }
 
 export function getTodoById(projectId, todoId) {
@@ -105,7 +100,10 @@ export function deleteTodo(projectId, todoId) {
 
   if (getTodoById(projectId, todoId) && project.todos.length > 0) {
     project.todos = project.todos.filter((t) => t.id !== todoId);
-    projects = projects.map((p) => (p.id === projectId ? project : p));
+    state.projects = state.projects.map((p) =>
+      p.id === projectId ? project : p,
+    );
+    setState(state);
   }
 }
 
@@ -125,7 +123,8 @@ export function editTodo(projectId, todoId, prop, value) {
 
   const project = getProjectById(projectId);
   project.todos = project.todos.map((t) => (t.id === todoId ? todo : t));
-  projects = getProjects().map((p) => (p.id === projectId ? project : p));
+  state.projects = getProjects().map((p) => (p.id === projectId ? project : p));
+  setState(state);
 }
 
 export function toggleTodo(projectId, todoId) {
