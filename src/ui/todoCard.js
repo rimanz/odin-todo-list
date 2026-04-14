@@ -36,6 +36,22 @@ export default function createTodoCard(parent, data) {
     parent: todoDetails,
   });
 
+  // todo details -> description
+  createNode({
+    tag: "p",
+    classNames: "todo-description",
+    textContent: data.description,
+    parent: todoDetails,
+  });
+
+  // todo details -> priority
+  createNode({
+    tag: "p",
+    classNames: "todo-priority",
+    textContent: data.priority,
+    parent: todoDetails,
+  });
+
   // todo details -> due date
   createNode({
     tag: "p",
@@ -44,13 +60,22 @@ export default function createTodoCard(parent, data) {
     parent: todoDetails,
   });
 
-  // todo details -> description
+  // todo details -> status
   createNode({
     tag: "p",
-    classNames: "todo-description",
-    textContent: data.description,
+    classNames: "todo-status",
+    textContent: data.completed ? "Completed" : "Pending",
     parent: todoDetails,
   });
+
+  // todo details -> notes
+  data.notes &&
+    createNode({
+      tag: "p",
+      classNames: "todo-notes",
+      textContent: data.notes,
+      parent: todoDetails,
+    });
 
   // todo actions:
   const todoActions = createNode({
