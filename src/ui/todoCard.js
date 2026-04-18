@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format, isValid } from "date-fns";
 import { getActiveProjectId, toggleTodo } from "../projectManager.js";
 import "../styles/todoCard.css";
 import { showDeleteConfirmation, showTodoDialog } from "./dialog.js";
@@ -53,12 +53,13 @@ export default function createTodoCard(parent, data) {
   });
 
   // todo details -> due date
-  createNode({
-    tag: "p",
-    classNames: "todo-due",
-    textContent: format(data.dueDate, "dd-MM-yyyy"),
-    parent: todoDetails,
-  });
+  isValid(data.dueDate) &&
+    createNode({
+      tag: "p",
+      classNames: "todo-due",
+      textContent: format(data.dueDate, "dd-MM-yyyy"),
+      parent: todoDetails,
+    });
 
   // todo details -> status
   createNode({

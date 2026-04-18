@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format, isValid } from "date-fns";
 import {
   addProject,
   addTodo,
@@ -73,7 +73,9 @@ export function showTodoDialog(todoData = null) {
   if (editMode) {
     inputFields.forEach((field) => {
       if (field.type === "date") {
-        field.value = format(todoData[field.name], "yyyy-MM-dd");
+        const dateValue = todoData[field.name];
+
+        if (isValid(dateValue)) field.value = format(dateValue, "yyyy-MM-dd");
       } else {
         field.value = todoData[field.name];
       }

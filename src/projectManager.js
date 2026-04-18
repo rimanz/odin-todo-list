@@ -119,7 +119,7 @@ export function getTodos(projectId) {
 
 export function editTodo(projectId, todoId, prop, value) {
   const todo = getTodoById(projectId, todoId);
-  todo[prop] = value;
+  todo[prop] = prop === "dueDate" ? new Date(value) : value;
 
   const project = getProjectById(projectId);
   project.todos = project.todos.map((t) => (t.id === todoId ? todo : t));
