@@ -53,11 +53,12 @@ export default function createTodoCard(parent, data) {
   });
 
   // todo details -> due date
-  isValid(data.dueDate) &&
+  const dueDate = new Date(data.dueDate);
+  isValid(dueDate) &&
     createNode({
       tag: "p",
       classNames: "todo-due",
-      textContent: format(data.dueDate, "dd-MM-yyyy"),
+      textContent: format(dueDate, "dd-MM-yyyy"),
       parent: todoDetails,
     });
 
