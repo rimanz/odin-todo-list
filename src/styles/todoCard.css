@@ -103,6 +103,7 @@
     border-radius: 4px;
     opacity: 0.8;
     order: -1;
+    margin-left: auto;
   }
 
   .todo-status,
@@ -155,6 +156,7 @@
     border: none;
     padding: 0;
     order: 0;
+    margin-left: 0;
 
     &:before {
       content: "Due: ";
