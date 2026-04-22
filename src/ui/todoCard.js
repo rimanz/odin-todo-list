@@ -7,7 +7,7 @@ import { createButton, createNode } from "./layout.js";
 export default function createTodoCard(parent, data) {
   // todo card
   const card = createNode({
-    classNames: `todo-card priority-${data.priority}`,
+    classNames: `todo-card priority-${data.priority} ${data.completed && "completed"}`,
     attributes: { id: data.id },
     parent,
   });
