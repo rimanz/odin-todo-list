@@ -23,7 +23,7 @@ const confirmationForm = document.getElementById("confirmation-view");
 const messageBox = document.getElementById("message-box");
 const errorInfoView = document.getElementById("error-info-view");
 const errorInfoBox = document.getElementById("error-info-box");
-const inputFields = document.querySelectorAll("[name]");
+const inputFields = document.querySelectorAll("input, textarea, select");
 const cancelButtons = document.querySelectorAll(".cancel-btn");
 let editMode;
 let projectId;
@@ -55,11 +55,9 @@ export function showProjectDialog(projectData = null) {
   showView("project-view");
   dialogHeading.textContent = `${editMode ? "Edit" : "New"} Project`;
 
-  if (editMode) {
-    inputFields.forEach((field) => {
-      field.value = projectData[field.name];
-    });
-  }
+  inputFields.forEach((field) => {
+    field.value = editMode ? projectData[field.name] : "";
+  });
 }
 
 export function showTodoDialog(todoData = null) {
@@ -70,17 +68,17 @@ export function showTodoDialog(todoData = null) {
   showView("todo-view");
   dialogHeading.textContent = `${editMode ? "Edit" : "New"} Todo`;
 
-  if (editMode) {
-    inputFields.forEach((field) => {
-      if (field.type === "date") {
-        const dateValue = todoData[field.name];
+  inputFields.forEach((field) => {
+    if (editMode && field.type === "date") {
+      const dateValue = todoData[field.name];
 
-        if (isValid(dateValue)) field.value = format(dateValue, "yyyy-MM-dd");
-      } else {
-        field.value = todoData[field.name];
-      }
-    });
-  }
+      if (isValid(dateValue)) field.value = format(dateValue, "yyyy-MM-dd");
+    } else if (field.type === "select-one") {
+      field.value = editMode ? todoData[field.name] : "medium";
+    } else {
+      field.value = editMode ? todoData[field.name] : "";
+    }
+  });
 }
 
 export function showDeleteConfirmation(id, type = "todo") {
@@ -103,37 +101,43 @@ export function showDeleteConfirmation(id, type = "todo") {
 // Listeners:
 todoForm.addEventListener("submit", (e) => {
   e.preventDefault();
+  const parentForm = e.target.closest("form");
   const projectId = getActiveProjectId();
-  const data = Object.fromEntries(new FormData(todoForm));
+  const data = Object.fromEntries(new FormData(parentForm));
 
   if (editMode) {
     Object.keys(data).forEach((key) => {
       editTodo(projectId, todoId, key, data[key]);
     });
   } else {
+    parentForm.reset();
     addTodo(projectId, data);
   }
 
   listTodos(projectId);
-  todoForm.reset();
-  todoForm.setAttribute("hidden", "");
+  parentForm.reset();
+  parentForm.setAttribute("hidden", "");
   dialog.close();
 });
 
 projectForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  const data = Object.fromEntries(new FormData(projectForm));
+  const parentForm = e.target.closest("form");
+  const data = Object.fromEntries(new FormData(parentForm));
 
   if (editMode) {
     Object.keys(data).forEach((key) => {
       renameProject(projectId, data.name);
     });
   } else {
+    parentForm.reset();
     addProject(data.name);
   }
 
   listProjects();
   createProjectDetails();
+  parentForm.reset();
+  parentForm.setAttribute("hidden", "");
   dialog.close();
 });
 
@@ -141,8 +145,6 @@ confirmationForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
   if (todoId === null) {
-    console.log(getProjects());
-
     try {
       deleteProject(projectId);
     } catch (error) {
@@ -153,7 +155,6 @@ confirmationForm.addEventListener("submit", (e) => {
       return;
     }
 
-    console.log(getProjects());
     listProjects();
     setActiveProjectId(getProjects()[0].id);
     createProjectDetails();
@@ -168,7 +169,7 @@ confirmationForm.addEventListener("submit", (e) => {
 cancelButtons.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     e.preventDefault();
-    todoForm.reset();
+    e.target.closest("form").reset();
     dialog.close();
   });
 });
