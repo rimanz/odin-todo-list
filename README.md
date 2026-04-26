@@ -1,6 +1,15 @@
 # odin-todo-list
 
-A modular JavaScript Todo List application built as part of The Odin Project curriculum.
+A modular JavaScript Todo List application built as part of The Odin Project curriculum. This app allows users to organize their tasks into projects, manage todos with due dates, and persist data locally.
+
+## ✨ Features
+
+- **Project Management**: Create and organize multiple projects
+- **Todo Management**: Add, edit, delete, and mark todos as complete
+- **Persistent Storage**: Data is saved locally using browser's localStorage
+- **Modular Architecture**: Clean separation of concerns with dedicated modules
+- **Responsive UI**: User-friendly interface with dialogs and sidebar navigation
+- **Date Handling**: Uses date-fns for robust date manipulation
 
 ## 🛠️ Getting Started
 
@@ -38,18 +47,42 @@ npm install
 ## 📂 Project Structure
 
 ```
+package.json
+README.md
 webpack.common.js
 webpack.dev.js
 webpack.prod.js
 src/
   index.js
-  styles.css
+  project.js
+  projectManager.js
+  storage.js
   template.html
-package.json
-README.md
+  todo.js
+  icons/
+  styles/
+    dialog.css
+    index.css
+    projectView.css
+    sidebar.css
+    todoCard.css
+  ui/
+    dialog.js
+    layout.js
+    projectDetails.js
+    sidebar.js
+    todoCard.js
 ```
 
 - **`src/`** contains application source files
+  - **`index.js`** - Main entry point
+  - **`project.js`** - Project model
+  - **`todo.js`** - Todo model
+  - **`projectManager.js`** - Manages projects and todos
+  - **`storage.js`** - Handles localStorage operations
+  - **`ui/`** - UI components and layout
+  - **`styles/`** - CSS stylesheets
+  - **`icons/`** - Icon assets
 - **`webpack.*.js`** configuration files for different environments
 
 ## 🚀 Usage
@@ -63,6 +96,14 @@ README.md
    npm run build
    ```
 3. Open `dist/index.html` in your browser or use a static server.
+
+## 🛠️ Technologies Used
+
+- **JavaScript (ES6+)** - Core programming language
+- **Webpack** - Module bundler and build tool
+- **CSS3** - Styling
+- **HTML5** - Markup
+- **date-fns** - Date utility library
 
 ## 📄 Author
 
