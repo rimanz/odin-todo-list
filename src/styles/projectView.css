@@ -1,6 +1,6 @@
 .project-view {
   flex-grow: 1;
-  padding: 1rem 1.5rem;
+  padding: 1rem 2rem;
 }
 
 .project-view header {
@@ -21,6 +21,7 @@
 
 .todos {
   padding-block: 1rem;
+  max-width: 60rem;
 }
 
 .todos .section-header {
@@ -29,15 +30,17 @@
   width: 100%;
   padding-block: 0.5rem;
   opacity: 0.5;
-  border-bottom: 1px solid grey;
 }
 
 .todo-list {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
   column-gap: 1rem;
-  padding-block: 1rem;
+  padding: 2rem 2rem 0 1rem;
+  border-top: 1px solid grey;
+  border-right: 1px solid grey;
+  border-top-right-radius: 24px;
+  margin-bottom: 2rem;
 }
 
 .placeholder-text {
@@ -63,17 +66,17 @@
   border: 1px solid;
   border-radius: 3px;
   outline-color: tomato;
-}
 
-.add-todo-btn:hover {
-  cursor: pointer;
-  background-color: tomato;
-  color: white;
-  opacity: 0.8;
-}
+  &:hover {
+    cursor: pointer;
+    background-color: tomato;
+    color: white;
+    opacity: 0.8;
+  }
 
-.add-todo-btn:active {
-  cursor: pointer;
-  background-color: tomato;
-  color: white;
+  &:active {
+    cursor: pointer;
+    background-color: tomato;
+    color: white;
+  }
 }

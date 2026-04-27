@@ -6,8 +6,13 @@
   padding: 0;
 }
 
-li {
-  list-style-type: none;
+#root {
+  --accent-color: tomato;
+  --shadow-small: 1px 1px 4px 1px lightgrey;
+  --shadow-medium: 0 0 15px 0 lightgrey;
+  --shadow-large: 1px 1px 10px 1px lightgrey;
+  display: flex;
+  min-height: 100vh;
 }
 
 body {
@@ -25,7 +30,6 @@ body {
     sans-serif;
 }
 
-#root {
-  display: flex;
-  min-height: 100vh;
+li {
+  list-style-type: none;
 }
